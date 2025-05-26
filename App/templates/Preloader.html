@@ -1,0 +1,62 @@
+<style>
+    #PreloaderAppicala {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(11, 49, 66, 0.9);
+        z-index: 9999;
+        overflow: hidden;
+
+    }
+
+    #PreloaderAppicala img {
+        animation: cargar 1s infinite alternate;
+    }
+
+    #PreloaderAppicala::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 70%);
+        animation: brillo 1.5s infinite;
+    }
+
+    @keyframes cargar {
+        0% {
+            opacity: 0.3;
+            filter: blur(5px);
+        }
+
+        100% {
+            opacity: 1;
+            filter: blur(0);
+        }
+    }
+
+    @keyframes brillo {
+        0% {
+            left: -100%;
+        }
+
+        100% {
+            left: 100%;
+        }
+    }
+</style>
+<div id="PreloaderAppicala" style="text-align: center;">
+    <img src="{{ url_for('static', filename='assets/img/favicon/Appicala.png') }}" alt="Loading...">
+</div>
+<script>
+    $("#PreloaderAppicala").fadeIn();
+    $(window).on("load", function() {
+        $("#PreloaderAppicala").fadeOut();
+    });
+</script>
